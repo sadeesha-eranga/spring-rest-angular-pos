@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface ItemService {
 
-    void saveItem(String id, ItemDTO dto);
+    void saveItem(ItemDTO dto);
 
-    void updateItem(String id, ItemDTO dto);
+    void updateItem(int id, ItemDTO dto);
 
-    void deleteItem(String id);
+    void deleteItem(int id);
 
-    ItemDTO findItem(String id);
+    ItemDTO findItem(int id);
 
     List<ItemDTO> findAllItems();
 

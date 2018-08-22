@@ -12,13 +12,13 @@ import java.util.List;
  */
 public interface CustomerService {
 
-    void saveCustomer(String id, CustomerDTO dto);
+    void saveCustomer(CustomerDTO dto);
 
-    void updateCustomer(String id, CustomerDTO dto);
+    void updateCustomer(int id, CustomerDTO dto);
 
-    void deleteCustomer(String id);
+    void deleteCustomer(int id);
 
-    CustomerDTO findCustomer(String id);
+    CustomerDTO findCustomer(int id);
 
     List<CustomerDTO> findAllCustomers();
 

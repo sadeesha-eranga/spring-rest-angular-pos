@@ -27,19 +27,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveCustomer(String id, CustomerDTO dto) {
-        if (!id.equals(dto.getId())){
-            throw new RuntimeException("Customer ID mismatched.");
-        }
+    public void saveCustomer(CustomerDTO dto) {
         customerRepository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateCustomer(String id, CustomerDTO dto) {
-        if (!id.equals(dto.getId())){
-            throw new RuntimeException("Customer ID mismatched.");
-        }
+    public void updateCustomer(int id, CustomerDTO dto) {
         if (customerRepository.existsById(id)) {
             customerRepository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
         } else {
@@ -49,12 +43,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void deleteCustomer(String id) {
+    public void deleteCustomer(int id) {
         customerRepository.deleteById(id);
     }
 
     @Override
-    public CustomerDTO findCustomer(String id) {
+    public CustomerDTO findCustomer(int id) {
         Customer customer = customerRepository.findById(id).get();
         return new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress());
     }

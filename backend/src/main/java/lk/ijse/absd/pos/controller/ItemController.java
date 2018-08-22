@@ -1,8 +1,9 @@
 package lk.ijse.absd.pos.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.absd.pos.dto.ItemDTO;
+import lk.ijse.absd.pos.service.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +15,50 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("api/v1/items")
 public class ItemController {
+
+    @Autowired
+    private ItemService itemService;
+
+    @PutMapping
+    public void saveItem(@RequestBody ItemDTO itemDTO) {
+        itemService.saveItem(itemDTO);
+    }
+
+    @PostMapping("{id}")
+    public void updateItem(@RequestParam String id, @RequestBody ItemDTO itemDTO) {
+        itemService.updateItem(Integer.parseInt(id), itemDTO);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteItem(@PathVariable int id) {
+        itemService.deleteItem(id);
+    }
+
+    @GetMapping("{id}")
+    public ItemDTO findItem(@PathVariable int id) {
+        return itemService.findItem(id);
+    }
+
+    @GetMapping()
+    public Object findAllItems(@RequestParam(required = false) String action, @RequestParam(required = false) String description) {
+        if (null != action) {
+            switch (action) {
+                case "count": {
+                    return itemService.getItemCount();
+                }
+
+                case "like": {
+                    return itemService.findItemsLike(description);
+                }
+
+                default: {
+                    return itemService.findAllItems();
+                }
+            }
+        } else {
+            return itemService.findAllItems();
+        }
+    }
 
 
 }

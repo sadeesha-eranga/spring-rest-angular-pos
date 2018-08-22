@@ -21,18 +21,23 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PutMapping("{id}")
-    public void saveCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
-        customerService.saveCustomer(id, customerDTO);
+    @PutMapping
+    public void saveCustomer(@RequestBody CustomerDTO customerDTO) {
+        customerService.saveCustomer(customerDTO);
+    }
+
+    @PostMapping("{id}")
+    public void updateCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
+        customerService.updateCustomer(Integer.parseInt(id), customerDTO);
     }
 
     @DeleteMapping("{id}")
-    public void deleteCustomer(@PathVariable String id) {
+    public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);
     }
 
     @GetMapping("{id}")
-    public CustomerDTO findCustomer(@PathVariable String id) {
+    public CustomerDTO findCustomer(@PathVariable int id) {
         return customerService.findCustomer(id);
     }
 

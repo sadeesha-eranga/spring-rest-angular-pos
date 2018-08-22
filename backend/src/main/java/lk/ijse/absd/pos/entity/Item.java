@@ -1,6 +1,8 @@
 package lk.ijse.absd.pos.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -13,8 +15,8 @@ import javax.persistence.Id;
 public class Item {
 
     @Id
-    private
-    String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String description;
     private double unitPrice;
     private int qtyOnHand;
@@ -22,18 +24,18 @@ public class Item {
     public Item() {
     }
 
-    public Item(String id, String description, double unitPrice, int qtyOnHand) {
+    public Item(int id, String description, double unitPrice, int qtyOnHand) {
         this.setId(id);
         this.setDescription(description);
         this.setUnitPrice(unitPrice);
         this.setQtyOnHand(qtyOnHand);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

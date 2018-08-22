@@ -27,19 +27,14 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveItem(String id, ItemDTO dto) {
-        if (!id.equals(dto.getId())) {
-            throw new RuntimeException("Item ID mismatched.");
-        }
+    public void saveItem(ItemDTO dto) {
         itemRepository.save(new Item(dto.getId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateItem(String id, ItemDTO dto) {
-        if (!id.equals(dto.getId())) {
-            throw new RuntimeException("Item ID mismatched.");
-        } else if (itemRepository.existsById(id)) {
+    public void updateItem(int id, ItemDTO dto) {
+        if (itemRepository.existsById(id)) {
             itemRepository.save(new Item(dto.getId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
         } else {
             throw new RuntimeException("Item not found.");
@@ -48,12 +43,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void deleteItem(String id) {
+    public void deleteItem(int id) {
         itemRepository.deleteById(id);
     }
 
     @Override
-    public ItemDTO findItem(String id) {
+    public ItemDTO findItem(int id) {
         Item item = itemRepository.findById(id).get();
         return new ItemDTO(item.getId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand());
     }

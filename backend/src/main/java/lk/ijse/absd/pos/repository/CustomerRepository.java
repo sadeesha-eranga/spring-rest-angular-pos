@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 2018-08-21
  * Time: 10:41 AM
  */
-public interface CustomerRepository extends JpaRepository<Customer, String> {
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     @Query("SELECT c FROM Customer c WHERE c.name LIKE ?#{[0]}")
     List<Customer> findCustomersLike(String name);

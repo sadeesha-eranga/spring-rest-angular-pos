@@ -8,7 +8,7 @@ package lk.ijse.absd.pos.dto;
  */
 public class ItemDTO {
 
-    private String id;
+    private int id;
     private String description;
     private double unitPrice;
     private int qtyOnHand;
@@ -16,18 +16,18 @@ public class ItemDTO {
     public ItemDTO() {
     }
 
-    public ItemDTO(String id, String description, double unitPrice, int qtyOnHand) {
+    public ItemDTO(int id, String description, double unitPrice, int qtyOnHand) {
         this.setId(id);
         this.setDescription(description);
         this.setUnitPrice(unitPrice);
         this.setQtyOnHand(qtyOnHand);
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

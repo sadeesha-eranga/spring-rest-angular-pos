@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 2018-08-21
  * Time: 10:42 AM
  */
-public interface ItemRepository extends JpaRepository<Item, String> {
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     @Query("SELECT c FROM Item c WHERE c.description LIKE ?#{[0]}")
     List<Item> findItemsLike(String description);
