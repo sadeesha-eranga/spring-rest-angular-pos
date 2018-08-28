@@ -28,14 +28,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveCustomer(CustomerDTO dto) {
-        customerRepository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
+        customerRepository.save(new Customer(dto.getCustomerId(), dto.getName(), dto.getAddress()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateCustomer(int id, CustomerDTO dto) {
         if (customerRepository.existsById(id)) {
-            customerRepository.save(new Customer(dto.getId(), dto.getName(), dto.getAddress()));
+            customerRepository.save(new Customer(dto.getCustomerId(), dto.getName(), dto.getAddress()));
         } else {
             throw new RuntimeException("Customer not found.");
         }
@@ -50,7 +50,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO findCustomer(int id) {
         Customer customer = customerRepository.findById(id).get();
-        return new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress());
+        return new CustomerDTO(customer.getCustomerId(), customer.getName(), customer.getAddress());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> customerList = customerRepository.findAll();
         List<CustomerDTO> dtoList = new ArrayList<>();
         customerList.forEach(customer -> {
-            dtoList.add(new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress()));
+            dtoList.add(new CustomerDTO(customer.getCustomerId(), customer.getName(), customer.getAddress()));
         });
         return dtoList;
     }
@@ -68,7 +68,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<Customer> list = customerRepository.findCustomersLike("%" + name + "%");
         List<CustomerDTO> dtoList = new ArrayList<>();
         list.forEach(customer -> {
-            dtoList.add(new CustomerDTO(customer.getId(), customer.getName(), customer.getAddress()));
+            dtoList.add(new CustomerDTO(customer.getCustomerId(), customer.getName(), customer.getAddress()));
         });
         return dtoList;
     }

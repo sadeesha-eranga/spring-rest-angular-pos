@@ -28,14 +28,14 @@ public class ItemServiceImpl implements ItemService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void saveItem(ItemDTO dto) {
-        itemRepository.save(new Item(dto.getId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
+        itemRepository.save(new Item(dto.getItemId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateItem(int id, ItemDTO dto) {
         if (itemRepository.existsById(id)) {
-            itemRepository.save(new Item(dto.getId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
+            itemRepository.save(new Item(dto.getItemId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
         } else {
             throw new RuntimeException("Item not found.");
         }
@@ -50,7 +50,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDTO findItem(int id) {
         Item item = itemRepository.findById(id).get();
-        return new ItemDTO(item.getId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand());
+        return new ItemDTO(item.getItemId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> itemList = itemRepository.findAll();
         List<ItemDTO> dtoList = new ArrayList<>();
         itemList.forEach(item -> {
-            dtoList.add(new ItemDTO(item.getId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+            dtoList.add(new ItemDTO(item.getItemId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
         });
         return dtoList;
     }
@@ -68,7 +68,7 @@ public class ItemServiceImpl implements ItemService {
         List<Item> itemList = itemRepository.findItemsLike("%" + description + "%");
         List<ItemDTO> dtoList = new ArrayList<>();
         itemList.forEach(item -> {
-            dtoList.add(new ItemDTO(item.getId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
+            dtoList.add(new ItemDTO(item.getItemId(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
         });
         return dtoList;
     }

@@ -5,8 +5,6 @@ import lk.ijse.absd.pos.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Created by IntelliJ IDEA.
  * User: sadeesha

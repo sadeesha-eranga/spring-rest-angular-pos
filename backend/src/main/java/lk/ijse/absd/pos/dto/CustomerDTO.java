@@ -8,25 +8,30 @@ package lk.ijse.absd.pos.dto;
  */
 public class CustomerDTO {
 
-    private int id;
+    private int customerId;
     private String name;
     private String address;
 
     public CustomerDTO() {
     }
 
-    public CustomerDTO(int id, String name, String address) {
-        this.setId(id);
+    public CustomerDTO(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public CustomerDTO(int customerId, String name, String address) {
+        this.setCustomerId(customerId);
         this.setName(name);
         this.setAddress(address);
     }
 
-    public int getId() {
-        return id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public String getName() {
@@ -48,7 +53,7 @@ public class CustomerDTO {
     @Override
     public String toString() {
         return "CustomerDTO{" +
-                "id='" + id + '\'' +
+                "customerId='" + customerId + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 '}';
