@@ -3,6 +3,7 @@ package lk.ijse.absd.pos.controller;
 import lk.ijse.absd.pos.dto.ItemDTO;
 import lk.ijse.absd.pos.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,19 +20,19 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PutMapping
-    public void saveItem(@RequestBody ItemDTO itemDTO) {
-        itemService.saveItem(itemDTO);
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean saveItem(@RequestBody ItemDTO itemDTO) {
+        return itemService.saveItem(itemDTO);
     }
 
-    @PostMapping("{id}")
-    public void updateItem(@RequestParam String id, @RequestBody ItemDTO itemDTO) {
-        itemService.updateItem(Integer.parseInt(id), itemDTO);
+    @PostMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean updateItem(@PathVariable String id, @RequestBody ItemDTO itemDTO) {
+        return itemService.updateItem(Integer.parseInt(id), itemDTO);
     }
 
-    @DeleteMapping("{id}")
-    public void deleteItem(@PathVariable int id) {
-        itemService.deleteItem(id);
+    @DeleteMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean deleteItem(@PathVariable int id) {
+        return itemService.deleteItem(id);
     }
 
     @GetMapping("{id}")
@@ -39,7 +40,7 @@ public class ItemController {
         return itemService.findItem(id);
     }
 
-    @GetMapping()
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Object findAllItems(@RequestParam(required = false) String action, @RequestParam(required = false) String description) {
         if (null != action) {
             switch (action) {

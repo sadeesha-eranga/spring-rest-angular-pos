@@ -27,24 +27,27 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveItem(ItemDTO dto) {
+    public boolean saveItem(ItemDTO dto) {
         itemRepository.save(new Item(dto.getItemId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
+        return true;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateItem(int id, ItemDTO dto) {
+    public boolean updateItem(int id, ItemDTO dto) {
         if (itemRepository.existsById(id)) {
             itemRepository.save(new Item(dto.getItemId(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
         } else {
             throw new RuntimeException("Item not found.");
         }
+        return true;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void deleteItem(int id) {
+    public boolean deleteItem(int id) {
         itemRepository.deleteById(id);
+        return true;
     }
 
     @Override

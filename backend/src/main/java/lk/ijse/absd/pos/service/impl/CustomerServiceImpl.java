@@ -27,24 +27,27 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void saveCustomer(CustomerDTO dto) {
+    public boolean saveCustomer(CustomerDTO dto) {
         customerRepository.save(new Customer(dto.getCustomerId(), dto.getName(), dto.getAddress()));
+        return true;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void updateCustomer(int id, CustomerDTO dto) {
+    public boolean updateCustomer(int id, CustomerDTO dto) {
         if (customerRepository.existsById(id)) {
             customerRepository.save(new Customer(dto.getCustomerId(), dto.getName(), dto.getAddress()));
         } else {
             throw new RuntimeException("Customer not found.");
         }
+        return true;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public void deleteCustomer(int id) {
+    public boolean deleteCustomer(int id) {
         customerRepository.deleteById(id);
+        return true;
     }
 
     @Override

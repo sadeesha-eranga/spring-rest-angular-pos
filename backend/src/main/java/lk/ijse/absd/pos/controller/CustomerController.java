@@ -20,18 +20,18 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PutMapping
-    public void saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        customerService.saveCustomer(customerDTO);
+    public boolean saveCustomer(@RequestBody CustomerDTO customerDTO) {
+        return customerService.saveCustomer(customerDTO);
     }
 
     @PostMapping("{id}")
-    public void updateCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
-        customerService.updateCustomer(Integer.parseInt(id), customerDTO);
+    public boolean updateCustomer(@PathVariable String id, @RequestBody CustomerDTO customerDTO) {
+        return customerService.updateCustomer(Integer.parseInt(id), customerDTO);
     }
 
     @DeleteMapping("{id}")
-    public void deleteCustomer(@PathVariable int id) {
-        customerService.deleteCustomer(id);
+    public boolean deleteCustomer(@PathVariable int id) {
+        return customerService.deleteCustomer(id);
     }
 
     @GetMapping("{id}")

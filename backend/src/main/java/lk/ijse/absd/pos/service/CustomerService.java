@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface CustomerService {
 
-    void saveCustomer(CustomerDTO dto);
+    boolean saveCustomer(CustomerDTO dto);
 
-    void updateCustomer(int id, CustomerDTO dto);
+    boolean updateCustomer(int id, CustomerDTO dto);
 
-    void deleteCustomer(int id);
+    boolean deleteCustomer(int id);
 
     CustomerDTO findCustomer(int id);
 
